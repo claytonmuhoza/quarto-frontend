@@ -35,4 +35,5 @@ export class Board{
     {
         this.board[x][y].setPiece(piece);
     }
+   
 }

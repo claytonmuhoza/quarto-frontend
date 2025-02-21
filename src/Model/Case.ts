@@ -26,4 +26,5 @@ export class Case{
     {
         return this.piece?.getPieceString();
     }
+    
 }

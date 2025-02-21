@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import BagComponent from "../BagComponent";
 import BoardComponent from "../BoardComponent";
 import GivenPieceComponent from "../GivenPieceComponent";
@@ -13,9 +13,9 @@ export default function GamePageComponent() {
     let [board, setBoard] = useState<Board>(new Board());
     let [givenPiece, setGivenPiece] = useState<Piece|null>(null);
     
-    const setBoardFunction = (piece: Piece | null) => {
-        if(piece)
-        {}
+    
+    const setBoardFunction = ( board: Board ) => {
+        setBoard(board);
     }
     // select a piece from the bag
     const setGivenPieceFunction = (piece: Piece | null) => {
@@ -30,13 +30,21 @@ export default function GamePageComponent() {
                 setBag(copyBag);
             }
         }
+        else
+        {
+            if(piece==null)
+            {
+                setGivenPiece(null);
+            }
+        }
+        
     }
     return (
         <div>
             {/* <PiecesQuarto/> */}
             <MenuComponent/>
             <div className="game-page-container">
-                <BoardComponent setBoard={setBoardFunction} boardData={board} setGivenPiece={setGivenPieceFunction}/>
+                <BoardComponent givenPiece={givenPiece} setBoard={setBoardFunction} boardData={board} setGivenPiece={setGivenPieceFunction}/>
                 <GivenPieceComponent piece={givenPiece} setGivenPiece={setGivenPieceFunction}/>
                 <BagComponent bagOfPiece={bag} setGivenPiece={setGivenPieceFunction}/>
                 
