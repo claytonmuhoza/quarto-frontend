@@ -1,0 +1,6 @@
+.case-container{
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
