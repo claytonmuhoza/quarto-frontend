@@ -1,0 +1,6 @@
+.piece-container img{
+    width:  3rem;
+}
+.given-piece-container .piece-container img{
+    width:  5rem;
+}
