@@ -6,6 +6,7 @@ export class Case{
     {
         this.piece = null;
     }
+    
     setPiece(piece:Piece | null)
     {
         if(piece)
@@ -20,11 +21,11 @@ export class Case{
     }
     getstringPiece()
     {
-        return this.piece?.toString();
+        return this.piece?.getPieceString();
     }
     getName()
     {
         return this.piece?.getPieceString();
     }
-    
+
 }

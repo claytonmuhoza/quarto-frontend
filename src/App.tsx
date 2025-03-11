@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <header className="app-header">Hello from the king</header>
+      <header className="app-header">Menu - </header>
       <main className="app-main">
         <GamePageComponent/>
       

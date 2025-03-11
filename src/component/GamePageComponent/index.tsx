@@ -8,37 +8,49 @@ import './style.css';
 import { Piece } from "../../Model/Piece";
 import { Bag } from "../../Model/Bag";
 import { Board } from "../../Model/Board";
+import { QuartoAI } from "../../Model/IA/QuartoIA";
 export default function GamePageComponent() {
-    let [bag, setBag] = useState<Bag>(new Bag());
-    let [board, setBoard] = useState<Board>(new Board());
-    let [givenPiece, setGivenPiece] = useState<Piece|null>(null);
+    // const [isPlayerTours, setIsPlayerTours] = useState<boolean>(true); 
+    //the bag that contain all piece to play
+    const [bag, setBag] = useState<Bag>(new Bag());
+    //the board where we put piece played
+    const [board, setBoard] = useState<Board>(new Board());
+    //piece that is selected by player to be played by the other player
+    const [givenPiece, setGivenPiece] = useState<Piece|null>(null);
     
     
     const setBoardFunction = ( board: Board ) => {
         setBoard(board);
     }
-    // select a piece from the bag
     const setGivenPieceFunction = (piece: Piece | null) => {
-        if(!givenPiece) {
+        if (!givenPiece) {
             setGivenPiece(piece);
-            if(piece)
-            {
-               //copy the bag
-                const copyBag: Bag = new Bag();
+            if (piece) {
+                const copyBag = new Bag();
                 Object.assign(copyBag, bag);
                 copyBag.removePiece(piece);
                 setBag(copyBag);
+    
+                // Lancer l'IA si c'est son tour
+                setTimeout(() => playAI(piece), 500);
             }
+        } else if (piece == null) {
+            setGivenPiece(null);
         }
-        else
-        {
-            if(piece==null)
-            {
+    };
+    const playAI = (piece:Piece) => {
+        if (piece) {
+            const { move } = QuartoAI.minimax(board, 3, true, -Infinity, Infinity);
+            const copyBoard = new Board();
+            copyBoard.setBoard(board.getBoard());
+            if (move) {
+                const [x, y] = move;
+                copyBoard.setCasePiece(x, y, piece);
                 setGivenPiece(null);
+                setBoard(copyBoard);
             }
         }
-        
-    }
+    };
     return (
         <div>
             {/* <PiecesQuarto/> */}

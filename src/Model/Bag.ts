@@ -34,9 +34,8 @@ export class Bag{
    
     removeAndReturnPiece(piece:Piece)
     {
-        const copy = {...this._pieces};
-        //remove the piece from the bag
-        this._pieces = this._pieces.filter(p => p.getPieceString() !== piece.getPieceString());
+        const copy = this._pieces.find(p => p.getPieceString() === piece.getPieceString());
+        if (copy) this.removePiece(piece);
         return copy;
     }
 }
